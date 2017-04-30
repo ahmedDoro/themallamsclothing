@@ -5,7 +5,7 @@
  * Date: 30/04/2017
  * Time: 16:12
  */
-mysql_connect("", "", "") or die(mysql_error());
+mysql_connect("br-cdbr-azure-south-b.cloudapp.net", "b5878316b539fe", "8e5d969e") or die(mysql_error());
 mysql_select_db("campusdate") or die(mysql_error());
 
 if(function_exists($_GET['method'])){
