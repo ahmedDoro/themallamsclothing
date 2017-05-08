@@ -14,5 +14,5 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 });
 
 // Products routes
-require '../src/routes/products.php';
+require 'src/routes/products.php';
 $app->run();
