@@ -1,27 +1,18 @@
 <?php
-	// Include confi.php
-	include_once('../config.php');
-	
-	
-	$action = $_SERVER['REQUEST_METHOD'];
-	
-	if ($action == 'GET'){
-			
-			 $getdata = "SELECT * FROM  products ";
-		               
-						$qur = $conn->query($getdata);
-						$msg="";
-						while($r = mysqli_fetch_assoc($qur)){
-						 
-						$msg[] = array("Image:" => $r['product_image'], "Title:" => $r['product_title'], "Price" => $r['product_price']);
-						}
-						$json = $msg;
-						 
-						header('content-type: application/json');
-						echo json_encode($json);
-						 
-						@mysqli_close($conn);
-			
-		
-	}
- ?>
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+require '../vendor/autoload.php';
+require '../src/connection/dbconfig.php';
+
+$app = new \Slim\App;
+$app->get('/hello/{name}', function (Request $request, Response $response) {
+    $name = $request->getAttribute('name');
+    $response->getBody()->write("Hello, $name");
+
+    return $response;
+});
+
+// Products routes
+require '../src/routes/products.php';
+$app->run();
